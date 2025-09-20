@@ -9,7 +9,7 @@ module top (
   wire Sa, Sb, Spd;
   wire [7:0] expa, expb;
   wire [9:0] expt, expt_pd;
-    wire [7:0] manta, mantb;  //explicit mantissa
+  wire [7:0] manta, mantb;  //explicit mantissa
   wire [10:0] mask;
   wire [16:0] mults, multc;
   wire [16:0] mantissa_temp, mantissa_pd;
@@ -69,3 +69,4 @@ module top (
   );
 
 endmodule
+
