@@ -1,4 +1,4 @@
-`timescale 1ns / 1ps
+`timescale 1ns / 1ps (* KEEP_HIERARCHY = "TRUE", DONT_TOUCH = "TRUE" *)
 
 module top (
     input  [15:0] A,
@@ -9,7 +9,7 @@ module top (
   wire Sa, Sb, Spd;
   wire [7:0] expa, expb;
   wire [9:0] expt, expt_pd;
-  wire [7:0] manta, mantb;  //explivit mantissa
+    wire [7:0] manta, mantb;  //explicit mantissa
   wire [10:0] mask;
   wire [16:0] mults, multc;
   wire [16:0] mantissa_temp, mantissa_pd;
@@ -20,9 +20,9 @@ module top (
       .Sa(Sa),
       .Sb(Sb),
       .expa(expa),
-      .manta(manta),
+      .manta(manta),  // mantissa of input A with leading 1
       .expb(expb),
-      .mantb(mantb)
+      .mantb(mantb)  // mantissa of input B with leading 1
   );
 
   precision_ctl pc (
@@ -48,20 +48,24 @@ module top (
       .multc(multc)
   );
 
-  /*carry_prop_adder cpa (
+  carry_prop_adder cpa (
       .in1(mults),
       .in2(multc),
       .sum(mantissa_temp)
   );
 
   normalization norm (
-      .matissa_i (mantissa_temp),
+      .mantissa_i(mantissa_temp),
       .exponent_i(expt),
       .exponent  (expt_pd),
       .mantissa  (mantissa_pd)
   );
 
-  exception_handling eh ();
-    */
+  exception_handling eh (
+      .expt_pd(expt_pd),
+      .mantissa_pd(mantissa_pd),
+      .Spd(Spd),
+      .Product(Product)
+  );
 
 endmodule
