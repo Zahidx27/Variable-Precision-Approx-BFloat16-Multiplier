@@ -58,5 +58,5 @@ The RTL implements the following stages:
 
 7. **Exception Handling (`exception_handling`)**  
    - Handles special cases: overflow, underflow.  
-   - Formats the final BFloat16 result (`{sign, exponent, mantissa}`).
+   - Formats the final BFloat16 result (`{sign: 1-bit, exponent: 8-bits, mantissa: 7-bits}`).
 
