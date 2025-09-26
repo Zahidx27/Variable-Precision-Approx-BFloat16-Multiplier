@@ -1,5 +1,3 @@
-`timescale 1ns / 1ps (* KEEP_HIERARCHY = "TRUE", DONT_TOUCH = "TRUE" *)
-
 module top (
     input  [15:0] A,
     input  [15:0] B,
@@ -9,10 +7,11 @@ module top (
   wire Sa, Sb, Spd;
   wire [7:0] expa, expb;
   wire [9:0] expt, expt_pd;
-  wire [7:0] manta, mantb;  //explicit mantissa
+  wire [7:0] manta, mantb;  //explivit mantissa
   wire [10:0] mask;
-  wire [16:0] mults, multc;
-  wire [16:0] mantissa_temp, mantissa_pd;
+  wire [10:0] mults, multc;
+  wire [10:0] mantissa_trunc;
+  wire [ 7:0] mantissa_pd;
 
   inp_processing ip (
       .A(A),
@@ -25,7 +24,7 @@ module top (
       .mantb(mantb)  // mantissa of input B with leading 1
   );
 
-  precision_ctl pc (
+  precision_ctl prec_ctrl (
       .expa(expa),
       .expb(expb),
       .mask(mask)   // mask bits to control truncation
@@ -50,18 +49,18 @@ module top (
 
   carry_prop_adder cpa (
       .in1(mults),
-      .in2(multc),
-      .sum(mantissa_temp)
+      .in2(multc << 1),
+      .sum(mantissa_trunc)
   );
 
   normalization norm (
-      .mantissa_i(mantissa_temp),
+      .mantissa_i(mantissa_trunc),
       .exponent_i(expt),
-      .exponent  (expt_pd),
-      .mantissa  (mantissa_pd)
+      .exponent(expt_pd),
+      .mantissa_pd(mantissa_pd)
   );
 
-  exception_handling eh (
+  exception_handling excep_hand (
       .expt_pd(expt_pd),
       .mantissa_pd(mantissa_pd),
       .Spd(Spd),
@@ -69,4 +68,3 @@ module top (
   );
 
 endmodule
-
