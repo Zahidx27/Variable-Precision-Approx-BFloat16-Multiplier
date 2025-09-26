@@ -6,7 +6,7 @@ module normalization (
 );
   reg overflow;
   reg [10:0] mantissa;
-  always @* begin
+    always @(*) begin
     if (mantissa_i[10] == 1'b1) begin
       exponent = exponent_i + 1'd1;
       overflow = 1;
