@@ -1,4 +1,4 @@
-# Variable-Precision Approximate Floating-Point Multiplier (BFloat16)
+# Variable-Precision Approximate BFloat16 Multiplier
 
 This repository contains a Verilog RTL implementation of a **variable-precision approximate floating-point multiplier**, inspired by the work of Hao Zhang and Seok-Bum Ko:
 
