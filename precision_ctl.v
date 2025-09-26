@@ -23,7 +23,7 @@ module precision_ctl (
   assign exp_magnitude = exp_sign ? (~unbiased_prod_exp + 1) : unbiased_prod_exp;
   assign rg = exp_magnitude[7:4];
 
-  // variable bit-width od product
+  // variable bit-width of product
   reg [3:0] bw_pd;
   always @(*) begin
     case (rg)
@@ -64,3 +64,4 @@ module precision_ctl (
 
   assign mask = precision_mask;
 endmodule
+
