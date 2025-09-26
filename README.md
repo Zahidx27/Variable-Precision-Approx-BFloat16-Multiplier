@@ -30,7 +30,7 @@ compared to a conventional BFloat16 multiplier.
 
 ## 🧩 Architecture
 
-The RTL implements a **pipelined multiplier** with the following stages:
+The RTL implements the following stages:
 
 1. **Input Processing (`inp_processing`)**  
    - Splits BFloat16 inputs into sign, exponent, and mantissa.  
