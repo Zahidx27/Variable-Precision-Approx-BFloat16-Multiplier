@@ -64,7 +64,14 @@ module top (
       .expt_pd(expt_pd),
       .mantissa_pd(mantissa_pd),
       .Spd(Spd),
+      .expa(expa),
+      .expb(expb),
+      .manta(manta),
+      .mantb(mantb),
+      .sa(Sa),
+      .sb(Sb),
       .Product(Product)
   );
 
 endmodule
+
